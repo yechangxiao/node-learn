@@ -1,0 +1,35 @@
+## 工程目录结构规划推荐
+### 一般我们会同时提供命令行模式和api模式两种使用方式，并且会借助第三方包来编写代码。
+### 除了代码外，一个完整的程序也应该有自己的文档和测试用例，因此，一个标准的工程目录都看起来像下边这样
+```js
+- /home/user/workspace/node-echo/   # 工程目录
+  - bin/                            # 存放命令行相关代码
+    node-echo
+  + doc/                            # 存放文档
+  - lib/                            # 存放API相关代码
+    echo.js
+  - node_modules/                   # 存放三方包
+    + argv/
+  + tests/                         # 存放测试用例
+  package.json                      # 元数据文件
+  README.md                         # 说明文件
+```
+### 其中部分文件内容如下
+```js
+/* bin/node-echo */
+const argv = require('argv'),
+    echo = require('../lib/echo')
+console.log(echo(argv.join(' ')))
+
+/* lib/echo.js */
+module.exports = function (message) {
+  return message
+};
+
+/* package.json */
+{
+  "name": "node-echo",
+  "main": "./lib/echo.js"
+}
+```
+### 以上例子中分类存放了不同类型的文件，并通过node_moudles目录直接使用三方包名加载模块。此外，定义了package.json之后，node-echo目录也可被当作一个包来使用。
