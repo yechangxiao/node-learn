@@ -19,5 +19,8 @@
   "homepage": "https://github.com/yechangxiao/node-learn#readme",
   "devDependencies": {
     "minimist": "^1.2.6"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0"
   }
 }
