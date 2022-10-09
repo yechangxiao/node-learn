@@ -36,11 +36,17 @@ app.post('/articles', async (req, res, next) => {
   }
 })
 
-app.get('/articles', async (req, res) => {
+app.get('/articles', async (req, res, next) => {
   try {
+    let { page = 1, size = 2 } = req.query
+    page = Number.parseInt(page)
+    size = Number.parseInt(size)
     await dbClient.connect()
     const collection = dbClient.db('test').collection('articles')
-    const ret = await collection.find()
+    const ret = await collection
+    .find()
+    .skip((page - 1) * size) // 跳过多少条
+    .limit(size) // 拿多少条
     const articles = await ret.toArray()
     const articlesCount = await collection.countDocuments()
     res.status(200).json({
@@ -50,7 +56,6 @@ app.get('/articles', async (req, res) => {
   } catch (error) {
     next(error)
   }
-  res.send('get/articles')
 })
 
 app.get('/articles/:id', (req, res) => {
