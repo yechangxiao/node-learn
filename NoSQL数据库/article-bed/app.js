@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectID } = require('mongodb')
 
 const connectUri = 'mongodb://localhost:27017'
 const dbClient = new MongoClient(connectUri)
@@ -58,12 +58,41 @@ app.get('/articles', async (req, res, next) => {
   }
 })
 
-app.get('/articles/:id', (req, res) => {
-  res.send('get/articles/id')
+app.get('/articles/:id', async (req, res, next) => {
+  try {
+    await dbClient.connect()
+    const collection = dbClient.db('test').collection('articles')
+    const article = await collection.findOne({
+      _id: ObjectID(req.params.id)
+    })
+    res.status(200).json({
+      article
+    })
+  } catch (error) {
+    next(error)
+  }
+  // res.send('get/articles/id')
 })
 
-app.patch('/articles/:id', (req, res) => {
-  res.send('patch/articles/id')
+app.patch('/articles/:id', async (req, res, next) => {
+  // res.send('patch/articles/id')
+  try {
+    await dbClient.connect()
+    const collection = dbClient.db('test').collection('articles')
+    await collection.updateOne({
+      _id: ObjectID(req.params.id)
+    }, {
+      $set: req.body.article
+    })
+    const article = await collection.findOne({
+      _id: ObjectID(req.params.id)
+    })
+    res.status(201).json({
+      article
+    })
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.delete('/articles/:id', (req, res) => {
