@@ -1,5 +1,6 @@
 const express = require('express')
 const userCtrl = require('../controller/user')
+const userValidate = require('../validator/user')
 
 const router = express.Router()
 
@@ -7,7 +8,7 @@ const router = express.Router()
 router.post('/users/login', userCtrl.login)
 
 // 用户注册
-router.post('/users', userCtrl.register)
+router.post('/users', userValidate.register, userCtrl.register) // 通过验证，执行具体的控制器处理
 
 // 获取当前登录用户
 router.get('/user', userCtrl.getCurrentUser)
