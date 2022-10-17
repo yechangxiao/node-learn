@@ -17,9 +17,12 @@ exports.register = async (req, res, next) => {
     console.log(req.body.user);
     
     // 验证通过，将数据保存到数据库
-    const user = new User(req.body.user)
+    let user = new User(req.body.user)
     // 保存到数据库
     await user.save()
+    // 不返回密码
+    user = user.toJSON()
+    delete user.password
     // 发送成功响应
     res.status(201).json({
       user
