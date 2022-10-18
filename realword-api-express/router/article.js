@@ -11,4 +11,7 @@ router.post('/', auth, articleValidator.createArticle, articleCtrl.createArticle
 // 获取文章
 router.get('/:articleId', articleValidator.getArticle, articleCtrl.getArticle)
 
+// 获取文章列表
+router.get('/', articleCtrl.getArticles)
+
 module.exports = router
