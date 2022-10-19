@@ -17,4 +17,7 @@ router.get('/', articleCtrl.getArticles)
 // 更新文章
 router.put('/:articleId', auth, articleValidator.updateArticle, articleCtrl.updateArticle)
 
+// 删除文章
+router.delete('/:articleId', auth, articleValidator.deleteArticle, articleCtrl.deleteArticle)
+
 module.exports = router

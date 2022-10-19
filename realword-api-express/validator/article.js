@@ -22,6 +22,7 @@ exports.updateArticle = [
   validate([
     validate.isValidObjectId(['params'], 'articleId')
   ]),
+  // 校验文章是否存在
   async (req, res, next) => {
     const articleId = req.params.articleId
     const article = await Article.findById(articleId)
@@ -31,6 +32,7 @@ exports.updateArticle = [
     }
     next()
   },
+  // 校验文章是否是当前登录用户
   async (req, res, next) => {
     if (req.user._id.toString() !== req.article.author.toString()) {
       return res.status(403).end()
@@ -39,7 +41,5 @@ exports.updateArticle = [
   }
 ]
 
-// 校验文章是否存在
 
-
-// 校验文章是否是当前登录用户
+exports.deleteArticle = exports.updateArticle

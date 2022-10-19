@@ -84,3 +84,14 @@ exports.updateArticle = async (req, res, next) => {
     next(error)
   }
 }
+
+// 删除文章
+exports.deleteArticle = async (req, res, next) => {
+  try {
+    const article = req.article
+    await article.remove()
+    res.status(200).end()
+  } catch (error) {
+    next(error)
+  }
+}
