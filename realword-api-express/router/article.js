@@ -14,4 +14,7 @@ router.get('/:articleId', articleValidator.getArticle, articleCtrl.getArticle)
 // 获取文章列表
 router.get('/', articleCtrl.getArticles)
 
+// 更新文章
+router.put('/:articleId', auth, articleValidator.updateArticle, articleCtrl.updateArticle)
+
 module.exports = router

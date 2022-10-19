@@ -67,3 +67,12 @@ exports.getArticles = async (req, res, next) => {
     next(error)
   }
 }
+
+// 更新文章
+exports.updateArticle = async (req, res, next) => {
+  try {
+    res.send('updateArticles')
+  } catch (error) {
+    next(error)
+  }
+}
