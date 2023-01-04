@@ -3,7 +3,7 @@ const path = require('path')
 // console.log(__dirname)
 // console.log(__filename)
 
-// 1 获取路径中的基础名称
+// 1 获取路径中的基础名称，可能是文件名称或者目录
 /**
  * 01 返回的就是接收路径中的最后一部分
  * 02 第二个参数表示扩展名，如果说没有设置则返回完整的文件名带后缀
@@ -92,10 +92,12 @@ const path = require('path')
  * from是可选的，通过to是否为绝对路径进行计算
  * 如果to是绝对路径，则忽略from，如果不是，则与from共同计算出绝对路径
 */
-console.log(path.resolve())
-console.log(path.resolve('/a', 'b'))
-console.log(path.resolve('/a', '/b'))
-console.log(path.resolve('a', '/b'))
-console.log(path.resolve('a', 'b'))
-console.log(path.resolve('a', '../b'))
-console.log(path.resolve('../b'))
+// console.log(path.resolve())
+// console.log(path.resolve('/a', 'b'))
+// console.log(path.resolve('/a', '/b'))
+// console.log(path.resolve('a', '/b'))
+// console.log(path.resolve('a', 'b'))
+// console.log(path.resolve('a', '../b'))
+// console.log(path.resolve('../b'))
+console.log(path.resolve(__dirname, 'b.html'))
+console.log(path.resolve('b.html')) // 当前的工作目录+文件名，这个与当前的执行目录不同
