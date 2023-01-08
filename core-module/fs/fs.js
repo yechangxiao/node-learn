@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-// readFile
+// readFile 一次性将整个文件写入内存，区别read
 // fs.readFile(path.resolve(__dirname, 'data.txt'), 'utf-8', (err, data) => {
 //   console.log(err)
 //   console.log(data)
