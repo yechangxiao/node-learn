@@ -99,5 +99,5 @@ const path = require('path')
 // console.log(path.resolve('a', 'b'))
 // console.log(path.resolve('a', '../b'))
 // console.log(path.resolve('../b'))
-console.log(path.resolve(__dirname, 'b.html'))
-console.log(path.resolve('b.html')) // 当前的工作目录+文件名，这个与当前的执行目录不同
+console.log(path.resolve(__dirname, 'b.html')) // __dirname指执行脚本的文件的目录
+console.log(path.resolve('b.html')) // 当前所在的目录+文件名，这个与当前的执行脚本的目录不同
